@@ -87,6 +87,40 @@ public class Registration {
         createNewAccountPage.invalidNameAlert();
     }
 
+    /** Register using password with numeric values
+     * Pre-conditions - Navigate to registration page
+     * Enter numeric values into password field
+     * Valid details in other fields
+     * Submit details
+     * Verify result
+     */
+    @Test
+    public void registerNumericPassword(){
+        homepage.navigateToSignInPage();
+        signInPage.clickCreateAnAccount();
+        createNewAccountPage.numericPasswordInput();
+        createNewAccountPage.clickSave();
+        signInPage.signOutButtonPresent();
+    }
+    /** Register with invalid birthdate
+     *
+     */
+    /** Register with invalid birthdate
+     * Pre-conditions - Navigate to registration page
+     * Enter invalid birthdate
+     * Valid details in other fields
+     * Submit details
+     * Verify result
+     */
+    @Test
+    public void registerWithInvalidBirthDate(){
+        homepage.navigateToSignInPage();
+        signInPage.clickCreateAnAccount();
+        createNewAccountPage.invalidBirthdateInput();
+        createNewAccountPage.clickSave();
+        createNewAccountPage.invalidBirthdateAlert();
+    }
+
     @After
     public void individualTearDown() {
 

@@ -33,7 +33,6 @@ public class SignInPage extends BasePage {
     private static final By SEND_RESET_LINK_BUTTON = By.cssSelector(".forgotten-password button:first-of-type");
     private static final By NOTIFICATION_MESSAGE = By.cssSelector(".ps-alert-error");
 
-
     public void enterCreateNewAccountEmailAddress(String emailAddress) {
         findAndType(EMAIL_ADDRESS_INPUT_BOX, emailAddress);
     }
@@ -117,6 +116,11 @@ public class SignInPage extends BasePage {
         enterForgottenPasswordEmailAddress(pd.getEmail());
         clickRetrievePassword();
         confirmationMessage();
+    }
+
+    public void signOutButtonPresent(){
+        WebElement alertBox = driver.findElement(SIGN_OUT_BUTTON);
+        assertTrue(elementIsVisible(alertBox));
     }
 
 }
