@@ -113,5 +113,72 @@ public class ShoppingCart {
         checkoutPage.orderConfirmationDisplayed();
     }
 
+    /** Make invoice address different to delivery address
+     Must have  on item in basket and be logged in
+    Navigate to basket
+ Click proceed to checkout
+ Delivery Address Page is shown
+ Make invoice address different
 
+ Click continue button
+ Verify shipping method displayed
+ **/
+
+@Test
+    public void differentaddresforinvoice(){
+    homePage.navigateToSignInPage();
+    signInPage.login();
+    homePage.goTo();
+    homePage.hoverOverItem();
+    homePage.addItemToCart();
+    homePage.addedToCart();
+    basketpage.navigateToBasket();
+    basketpage.clickProceedToCheckout();
+    checkoutPage.deliveryAddressSectionDisplayed();
+  basketpage.adddifferentaddress();
+//    basketpage.address("g");
+//    basketpage.city("j");
+//    basketpage.postcode("96701");
+//    basketpage.state("Hawaii");
+//    basketpage.country("United States");
+//    basketpage.save();
+   basketpage.verifyinvoiceaddress();
+}
+/**
+*Navigate to basket
+*Verify that all items are displayed
+*Verify that product counter and prices are correct
+**/
+@Test
+public void multipleitems(){
+    homePage.navigateToSignInPage();
+    signInPage.login();
+    homePage.hoverOverItem();
+    homePage.addItemToCart();
+    homePage.addedToCart();
+    basketpage.navigateToBasket();
+    basketpage.clickProceedToCheckout();
+    homePage.goTo();
+
+
+}
+/**
+*Navigate to basket
+*Click proceed to checkout
+*Logout
+*Verify cart emptied when sign back in.
+**/
+@Test
+public void emptybasketlogout(){
+    homePage.navigateToSignInPage();
+    signInPage.login();
+    homePage.goTo();
+    homePage.hoverOverItem();
+    homePage.addItemToCart();
+    homePage.addedToCart();
+    basketpage.navigateToBasket();
+   basketpage.clickSignOut();
+   basketpage.verifyemptycart("(0)");
+
+}
 }
