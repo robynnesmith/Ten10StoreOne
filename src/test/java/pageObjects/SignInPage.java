@@ -65,6 +65,8 @@ public class SignInPage extends BasePage {
         findAndType(EMAIL_INPUT, emailAddress);
     }
 
+    public void enterSignInPassword(String password){findAndType(PASSWORD_INPUT, password);}
+
     public void clickLogIn() {
         waitAndClick(SIGN_IN_BUTTON);
     }
@@ -140,4 +142,11 @@ public class SignInPage extends BasePage {
     }
     public void accountSuccessfullyUpdated(){ WebElement alertbox = driver.findElement(ACCOUNT_UPDATED_ALERT);
     assertTrue(elementIsVisible(alertbox));}
+
+    public void invalidPassword() {
+        enterSignInEmailAddress(pd.getEmail());
+        enterSignInPassword(pd.getInvalidPassword());
+        clickLogIn();
+        unregisteredUserAlert();
+    }
 }

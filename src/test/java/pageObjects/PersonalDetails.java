@@ -5,6 +5,7 @@ public class PersonalDetails {
     private String lastName;
     private String email;
     private String invalidEmail;
+    private String invalidPassword;
     private String password;
     private String address;
     private String city;
@@ -13,11 +14,12 @@ public class PersonalDetails {
     private String phoneNumber;
     private String aliasName;
 
-    public PersonalDetails(String firstName, String lastName, String email, String invalidEmail, String password, String address, String city, String state, String postcode, String phoneNumber, String aliasName) {
+    public PersonalDetails(String firstName, String lastName, String email, String invalidEmail, String invalidPassword,  String password, String address, String city, String state, String postcode, String phoneNumber, String aliasName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.invalidEmail = invalidEmail;
+        this.invalidPassword = invalidPassword;
         this.password = password;
         this.address = address;
         this.city = city;
@@ -42,6 +44,8 @@ public class PersonalDetails {
     public String getInvalidEmail() {
         return invalidEmail;
     }
+
+    public String getInvalidPassword() { return invalidPassword;}
 
     public String getPassword() {
         return password;

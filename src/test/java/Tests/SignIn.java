@@ -106,4 +106,20 @@ public class SignIn {
         signInPage.accountSuccessfullyUpdated();
     }
 
+    /**
+     * Sign in with invalid password
+     * Pre-Conditions - Must have signIn information for a registered user
+     * Navigate to Sign In Page
+     * Fill in Email Address
+     * Fill in incorrect Password
+     * Click Sign In
+     * Verify error message is displayed
+     */
+    @Test
+    public void signInWithInvalidPassword() {
+        homepage.navigateToSignInPage();
+        signInPage.invalidPassword();
+
+    }
+
 }
