@@ -20,10 +20,10 @@ public class HomePage extends BasePage {
     private Actions actions = new Actions(driver);
 
     private static final By SIGN_IN_BUTTON = By.cssSelector("#_desktop_user_info a");
-    private static final By BLOUSE_IMAGE = By.cssSelector("img[alt = 'Blouse'");
+    private static final By DRESS_IMAGE = By.cssSelector("img[alt = 'Printed Chiffon Dress']");
     private static final By QUICK_VIEW_LINK = By.cssSelector(".quick-view");
-    private static final By FIRST_PRODUCT_IMAGE = By.cssSelector("div.products > article:first-child img");
-    private static final By FIRST_PRODUCT_QUICKVIEW = By.cssSelector("div.products > article:first-child .quick-view");
+    private static final By FIRST_PRODUCT_IMAGE = By.cssSelector("div.products > article:last-child img");
+    private static final By FIRST_PRODUCT_QUICKVIEW = By.cssSelector("div.products > article:last-child .quick-view");
     private static final By ADD_TO_CART_BUTTON = By.cssSelector(".btn.btn-primary.add-to-cart");
     private static final By MODAL_WINDOW = By.cssSelector("#myModalLabel");
 
@@ -37,14 +37,14 @@ public class HomePage extends BasePage {
 
     public void hoverOverItem() {
 
-        actions.moveToElement(driver.findElement(BLOUSE_IMAGE)).build().perform();
+        actions.moveToElement(driver.findElement(DRESS_IMAGE)).build().perform();
 
         WebElement hoverView = driver.findElement(QUICK_VIEW_LINK);
         Assert.assertTrue(elementIsVisible(hoverView));
     }
 
     public void clickMoreButton() {
-        waitAndClick(BLOUSE_IMAGE);
+        waitAndClick(DRESS_IMAGE);
     }
 
 

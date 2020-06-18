@@ -15,7 +15,7 @@ public class ProductPage extends BasePage {
     }
 
     private static final By ADD_TO_CART_BUTTON = By.cssSelector(".btn.btn-primary.add-to-cart");
-    private static final By BLOUSE_IMAGE = By.cssSelector("img[alt = 'Blouse'");
+    final By DRESS_IMAGE = By.cssSelector("img[alt = 'Printed Chiffon Dress']");
     private static final By QUANTITY_UP_BUTTON = By.cssSelector(".material-icons.touchspin-up");
     private static final By SIZE_DROPDWON = By.cssSelector("#group_1");
     private static final By WHITE_COLOUR_OPTION = By.cssSelector("input[value = '8']");
@@ -26,7 +26,7 @@ public class ProductPage extends BasePage {
     }
 
     public void navigatetoProductPage() {
-        waitAndClick(BLOUSE_IMAGE);
+        waitAndClick(DRESS_IMAGE);
     }
 
     public void selectQuantity() {
