@@ -71,6 +71,21 @@ public class Registration {
         createNewAccountPage.clickSave();
     }
 
+    /** Register using name with numeric values
+     * Pre-conditions - Navigate to registration page
+     * Enter numeric values into name field
+     * Valid details in other fields
+     * Submit details
+     * Verify error message is displayed
+     */
+    @Test
+    public void registerNumericNameValues(){
+        homepage.navigateToSignInPage();
+        signInPage.clickCreateAnAccount();
+        createNewAccountPage.enterNumericNamePersonalDetails();
+        createNewAccountPage.clickSave();
+        createNewAccountPage.invalidNameAlert();
+    }
 
     @After
     public void individualTearDown() {
