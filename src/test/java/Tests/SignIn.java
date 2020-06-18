@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import pageObjects.HomePage;
+import pageObjects.PersonalDetails;
 import pageObjects.SignInPage;
 
 import static Tests.TestSuite.driverFactory;
@@ -89,4 +90,6 @@ public class SignIn {
         signInPage.userSignedOut();
 
     }
+
+
 }
