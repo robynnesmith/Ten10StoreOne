@@ -91,5 +91,19 @@ public class SignIn {
 
     }
 
+    /** Change account preferences
+     * preconditions - signed in with registered account
+     * navigate to account information
+     * opt in to offers and receiving newsletter
+     * verify result
+     */
+    @Test
+    public void changeAccountPreferences(){
+        homepage.navigateToSignInPage();
+        signInPage.login();
+        signInPage.accountInformationPage();
+        signInPage.changeAccountPreferences();
+        signInPage.accountSuccessfullyUpdated();
+    }
 
 }

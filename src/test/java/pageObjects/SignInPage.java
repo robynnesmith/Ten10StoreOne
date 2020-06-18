@@ -2,6 +2,7 @@ package pageObjects;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -32,6 +33,11 @@ public class SignInPage extends BasePage {
     private static final By FORGOTTEN_PASSWORD_LINK = By.cssSelector(".forgot-password");
     private static final By SEND_RESET_LINK_BUTTON = By.cssSelector(".forgotten-password button:first-of-type");
     private static final By NOTIFICATION_MESSAGE = By.cssSelector(".ps-alert-error");
+    private static final By ACCOUNT_INFORMATION = By.cssSelector("[id='identity-link']");
+    private static final By OFFERS_OPTIN_BUTTON = By.cssSelector("[name='optin']");
+    private static final By NEWSLETTER_OPTIN_BUTTON = By.cssSelector("[name=newsletter");
+    private static final By SAVE_CUSTOMER_CHANGES_BUTTON = By.cssSelector("[data-link-action='save-customer']");
+    private static final By ACCOUNT_UPDATED_ALERT = By.cssSelector("[data-alert='success']");
 
     public void enterCreateNewAccountEmailAddress(String emailAddress) {
         findAndType(EMAIL_ADDRESS_INPUT_BOX, emailAddress);
@@ -67,7 +73,6 @@ public class SignInPage extends BasePage {
         WebElement alertBox = driver.findElement(UNREGISTERED_USER_ALERT);
         assertTrue(elementIsVisible(alertBox));
     }
-
 
     public void forgottenPassword() {
         waitAndClick(FORGOTTEN_PASSWORD_LINK);
@@ -123,4 +128,16 @@ public class SignInPage extends BasePage {
         assertTrue(elementIsVisible(alertBox));
     }
 
+    public void changeAccountPreferences(){
+        enterPassword();
+        WebElement optinButton = driver.findElement(OFFERS_OPTIN_BUTTON);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].checked = true", optinButton);
+        WebElement newsletterOptinButton = driver.findElement(NEWSLETTER_OPTIN_BUTTON);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].checked = true", newsletterOptinButton);
+        waitAndClick(SAVE_CUSTOMER_CHANGES_BUTTON);
+    }
+    public void accountInformationPage(){ waitAndClick(ACCOUNT_INFORMATION);
+    }
+    public void accountSuccessfullyUpdated(){ WebElement alertbox = driver.findElement(ACCOUNT_UPDATED_ALERT);
+    assertTrue(elementIsVisible(alertbox));}
 }
