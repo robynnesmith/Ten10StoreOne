@@ -18,7 +18,7 @@ public class ProductPage extends BasePage {
     final By DRESS_IMAGE = By.cssSelector("img[alt = 'Printed Chiffon Dress']");
     private static final By QUANTITY_UP_BUTTON = By.cssSelector(".material-icons.touchspin-up");
     private static final By SIZE_DROPDWON = By.cssSelector("#group_1");
-    private static final By WHITE_COLOUR_OPTION = By.cssSelector("input[value = '8']");
+    private static final By GREEN_COLOUR_OPTION = By.cssSelector("input[value = '15']");
 
     public void productPageDisplayed() {
         WebElement productPage = driver.findElement(ADD_TO_CART_BUTTON);
@@ -34,12 +34,16 @@ public class ProductPage extends BasePage {
     }
 
     public void selectSize() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(SIZE_DROPDWON));
         Select size = new Select(driver.findElement(SIZE_DROPDWON));
         size.selectByVisibleText("M");
+
+
     }
 
     public void selectColour() {
-        WebElement chooseColour = driver.findElement(WHITE_COLOUR_OPTION);
+        wait.until(ExpectedConditions.presenceOfElementLocated(GREEN_COLOUR_OPTION));
+        WebElement chooseColour = driver.findElement(GREEN_COLOUR_OPTION);
         chooseColour.click();
     }
 
