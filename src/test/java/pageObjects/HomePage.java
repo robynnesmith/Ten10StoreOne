@@ -26,6 +26,13 @@ public class HomePage extends BasePage {
     private static final By FIRST_PRODUCT_QUICKVIEW = By.cssSelector("div.products > article:last-child .quick-view");
     private static final By ADD_TO_CART_BUTTON = By.cssSelector(".btn.btn-primary.add-to-cart");
     private static final By MODAL_WINDOW = By.cssSelector("#myModalLabel");
+    private static final By WOMEN_CATEGORY = By.cssSelector("#category-3");
+    private static final By SUMMER_DRESS_CATEGORY = By.cssSelector("#category-11");
+    private static final By HOVER_SECTION = By.cssSelector(".product-description");
+    private static final By SEARCH = By.cssSelector(".ui-autocomplete-input");
+    private static final By CLICK_SEARCH = By.cssSelector(".material-icons.search");
+    private static final By ANOTHER_PRODUCT_IMAGE = By.xpath("//*[@id='content']/section/div/article[4]/div/div[4]");
+    private static final By ANOTHER_PRODUCT_QUICKVIEW = By.cssSelector(" .quick-view");
 
     public void goTo() {
         driver.get(URL);
@@ -74,4 +81,35 @@ public class HomePage extends BasePage {
         addItemToCart();
         addedToCart();
     }
+
+
+
+    public void hoverOverCategory() {
+
+        actions.moveToElement(driver.findElement(WOMEN_CATEGORY)).build().perform();
+
+        WebElement hoverView = driver.findElement(SUMMER_DRESS_CATEGORY);
+        Assert.assertTrue(elementIsVisible(hoverView));
+    }
+
+    public void clickSummerDresses(){
+        waitAndClick(SUMMER_DRESS_CATEGORY);
+    }
+
+    public void hoverAndClickQuickview(){ hoverAndClick(driver, HOVER_SECTION, QUICK_VIEW_LINK);
+
+    }
+
+    public void addToCartButton(){
+        waitAndClick(ADD_TO_CART_BUTTON);
+    }
+
+    public void search(String productName){findAndType(SEARCH, productName);
+
+    }
+    public void clickSearch(){waitAndClick(CLICK_SEARCH);}
+
+    public void hoverAndContinueShopping(){hoverAndClick(driver, ANOTHER_PRODUCT_IMAGE, ANOTHER_PRODUCT_QUICKVIEW);}
+
+
 }

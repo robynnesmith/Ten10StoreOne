@@ -44,7 +44,10 @@ public class SignInPage extends BasePage {
     public void alreadyRegisteredAlertPresent() {
         WebElement alertBox = driver.findElement(ALREADY_REGISTERED_ALERT);
         assertTrue(elementIsVisible(alertBox));
+
     }
+
+    public void enterPasswordSignIn(String password){findAndType(PASSWORD_INPUT, password);}
 
     public void enterPassword() {
         findAndType(PASSWORD_INPUT, pd.getPassword());

@@ -19,7 +19,8 @@ public class ProductPage extends BasePage {
     private static final By QUANTITY_UP_BUTTON = By.cssSelector(".material-icons.touchspin-up");
     private static final By SIZE_DROPDWON = By.cssSelector("#group_1");
     private static final By GREEN_COLOUR_OPTION = By.cssSelector("input[value = '15']");
-
+    private static final By CONTINUE_SHOPPING = By.cssSelector(".btn.btn-secondary");
+    private static final By GO_TO_PRODUCT_PAGE = By.cssSelector("img[alt = 'Printed dress']");
     public void productPageDisplayed() {
         WebElement productPage = driver.findElement(ADD_TO_CART_BUTTON);
         Assert.assertTrue(elementIsVisible(productPage));
@@ -46,5 +47,10 @@ public class ProductPage extends BasePage {
         WebElement chooseColour = driver.findElement(GREEN_COLOUR_OPTION);
         chooseColour.click();
     }
+
+    public void clickContinueShopping(){waitAndClick(CONTINUE_SHOPPING);}
+
+    public void goToProductPage(){waitAndClick(GO_TO_PRODUCT_PAGE);}
+
 
 }

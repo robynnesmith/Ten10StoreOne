@@ -1,6 +1,7 @@
 package Tests;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import pageObjects.HomePage;
@@ -76,5 +77,60 @@ public class BuyJourney {
         basketpage.addToCart();
         homepage.addedToCart();
 
+    }
+
+
+    @Test
+    public void addItemViaSummerDressesInMenu(){
+        homepage.hoverOverCategory();
+        homepage.clickSummerDresses();
+        homepage.hoverAndClickQuickview();
+       productPage.selectSize();
+       productPage.selectQuantity();
+       homepage.addToCartButton();
+       homepage.addedToCart();
+
+
+
+
+    }
+
+    @Test
+    public void addItemViaCatalogueSearch(){
+    homepage.search("Printed dress");
+    homepage.clickSearch();
+    homepage.addItemToCart();
+    homepage.addedToCart();
+
+    }
+
+    @Test @Ignore
+    public void continueShoppingAddSecondItem(){
+        homepage.hoverOverItem();
+        homepage.addItemToCart();
+        productPage.clickContinueShopping();
+        homepage.hoverAndContinueShopping();
+    }
+    /*
+* Navigate to Sign In Page
+* Click Orders (bottom of page)
+* Click Details
+* Choose Product
+*Add Comment
+*Verify that message was successfuly sent"
+     */
+
+    @Test
+    public void addACommentToOrders(){
+        homepage.navigateToSignInPage();
+        signInPage.enterSignInEmailAddress("jellybaby@gmail.com");
+        signInPage.enterPasswordSignIn("sweet");
+        signInPage.clickLogIn();
+        basketpage.goToOrders();
+        basketpage.clickOrderDetails();
+        basketpage.selectProductInOrders();
+        basketpage.typeMessage(" where is my order?");
+        basketpage.sendMessage();
+        basketpage.checkMessageSent();
     }
 }

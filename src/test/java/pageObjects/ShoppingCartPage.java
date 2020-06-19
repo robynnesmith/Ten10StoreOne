@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import static junit.framework.TestCase.assertTrue;
 
@@ -32,6 +33,14 @@ public class ShoppingCartPage extends BasePage {
     private static final By PROCEED_TO_CHECKOUT_BUTTON = By.cssSelector(".checkout a");
     private static final By PERSONAL_INFORMATION_PAGE = By.id("checkout-personal-information-step");
     private static final By MODAL_PROCEED_TO_CHECKOUT_BUTTON = By.cssSelector(".cart-content-btn>a");
+    private static final By GO_TO_ORDERS = By.linkText("Orders");
+    private static final By ORDER_DETAILS = By.cssSelector(" tr:nth-child(1) > td.text-sm-center.order-actions > a:nth-child(1)");
+    private static final By SELECT_PRODUCT_FROM_ORDER = By.cssSelector("option[value = '1']");
+    private static final By TYPE_MESSAGE = By.cssSelector("textarea.form-control");
+    private static final By SEND_MESSAGE = By.cssSelector(".btn.btn-primary.form-control-submit");
+    private static final By MESSAGE_SUCCESS_ALERT = By.cssSelector("article.alert.alert-success");
+
+
 
 
     public void addToCart() {
@@ -99,5 +108,26 @@ public class ShoppingCartPage extends BasePage {
     public void clickModalProceedToCheckout() {
         waitAndClick(MODAL_PROCEED_TO_CHECKOUT_BUTTON);
     }
+
+    public void goToOrders(){waitAndClick(GO_TO_ORDERS);}
+
+    public void clickOrderDetails(){
+        waitAndClick(ORDER_DETAILS);
+    }
+
+
+    public void selectProductInOrders() {waitAndClick(SELECT_PRODUCT_FROM_ORDER);
+
+    }
+
+    public void typeMessage(String message){findAndType(TYPE_MESSAGE, message);}
+    public void sendMessage(){waitAndClick(SEND_MESSAGE);}
+
+    public void checkMessageSent() {
+        waitUntilVisible(MESSAGE_SUCCESS_ALERT);
+        WebElement removedFromCart = driver.findElement(MESSAGE_SUCCESS_ALERT);
+        Assert.assertTrue(elementIsVisible(removedFromCart));
+    }
+
 }
 
