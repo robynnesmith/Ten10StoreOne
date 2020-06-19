@@ -47,7 +47,7 @@ public class CreateNewAccountPage extends BasePage {
         PersonalDetails npi = getPersonalDetails();
         findAndType(FIRST_NAME_INPUT, npi.getFirstName());
         findAndType(LAST_NAME_INPUT, npi.getLastName());
-        findAndType(EMAIL_INPUT, "123456@hotmail.com");
+        findAndType(EMAIL_INPUT, npi.getEmail());
         findAndType(PASSWORD_INPUT, "1234567");
     }
 
@@ -55,7 +55,7 @@ public class CreateNewAccountPage extends BasePage {
         PersonalDetails ibi = getPersonalDetails();
         findAndType(FIRST_NAME_INPUT, ibi.getFirstName());
         findAndType(LAST_NAME_INPUT, ibi.getLastName());
-        findAndType(EMAIL_INPUT, "birthday@hotmail.com");
+        findAndType(EMAIL_INPUT, "robinredbreast@hotmail.com");
         findAndType(PASSWORD_INPUT, ibi.getPassword());
         findAndType(BIRTH_DATE_INPUT, "2019");
     }
