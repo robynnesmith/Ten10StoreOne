@@ -14,11 +14,7 @@ import static junit.framework.TestCase.assertTrue;
  */
 public class ShoppingCartPage extends BasePage {
 
-    public ShoppingCartPage(WebDriver driver) {
-        super(driver);
-    }
-
-    public HomePage homePage = new HomePage(driver);
+    public HomePage homePage = new HomePage();
 
     private static final By ADD_TO_CART_BUTTON = By.cssSelector(".btn.btn-primary.add-to-cart");
     private static final By MODAL_CLOSE = By.cssSelector(".close");

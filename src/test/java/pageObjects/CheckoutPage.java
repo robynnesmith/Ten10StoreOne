@@ -11,10 +11,6 @@ import java.util.List;
 
 public class CheckoutPage extends BasePage {
 
-    public CheckoutPage(WebDriver driver) {
-        super(driver);
-    }
-
     private PersonalDetails pd = getPersonalDetails();
     private static final By ADDRESS_SECTION = By.id("checkout-addresses-step");
     private static final By ADDRESS_INPUT = By.name("address1");

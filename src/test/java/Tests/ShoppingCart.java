@@ -12,17 +12,16 @@ import static Tests.TestSuite.driverFactory;
  */
 public class ShoppingCart {
 
-    public static WebDriver driver = driverFactory.getDriver();
-    private HomePage homePage = new HomePage(driver);
-    private ShoppingCartPage basketpage = new ShoppingCartPage(driver);
-    private SignInPage signInPage = new SignInPage(driver);
-    private ProductPage productPage = new ProductPage(driver);
-    private CheckoutPage checkoutPage = new CheckoutPage(driver);
+    private HomePage homePage = new HomePage();
+    private ShoppingCartPage basketpage = new ShoppingCartPage();
+    private SignInPage signInPage = new SignInPage();
+    private ProductPage productPage = new ProductPage();
+    private CheckoutPage checkoutPage = new CheckoutPage();
 
 
     @Before
     public void individualSetUp() {
-        driver.manage().deleteAllCookies();
+        homePage.clearCookies();
         homePage.goTo();
     }
 
@@ -113,73 +112,76 @@ public class ShoppingCart {
         checkoutPage.orderConfirmationDisplayed();
     }
 
-    /** Make invoice address different to delivery address
-     Must have  on item in basket and be logged in
-    Navigate to basket
- Click proceed to checkout
- Delivery Address Page is shown
- Make invoice address different
+    /**
+     * Make invoice address different to delivery address
+     * Must have  on item in basket and be logged in
+     * Navigate to basket
+     * Click proceed to checkout
+     * Delivery Address Page is shown
+     * Make invoice address different
+     * <p>
+     * Click continue button
+     * Verify shipping method displayed
+     **/
 
- Click continue button
- Verify shipping method displayed
- **/
-
-@Test
-    public void differentaddresforinvoice(){
-    homePage.navigateToSignInPage();
-    signInPage.login();
-    homePage.goTo();
-    homePage.hoverOverItem();
-    homePage.addItemToCart();
-    homePage.addedToCart();
-    basketpage.navigateToBasket();
-    basketpage.clickProceedToCheckout();
-    checkoutPage.deliveryAddressSectionDisplayed();
-  basketpage.adddifferentaddress();
+    @Test
+    public void differentaddresforinvoice() {
+        homePage.navigateToSignInPage();
+        signInPage.login();
+        homePage.goTo();
+        homePage.hoverOverItem();
+        homePage.addItemToCart();
+        homePage.addedToCart();
+        basketpage.navigateToBasket();
+        basketpage.clickProceedToCheckout();
+        checkoutPage.deliveryAddressSectionDisplayed();
+        basketpage.adddifferentaddress();
 // basketpage.address("g");
 //   basketpage.city("j");
 //basketpage.postcode("96701");
 //   basketpage.state("Hawaii");
 //basketpage.country("United States");
-    basketpage.save();
-   basketpage.verifyinvoiceaddress();
-}
-/**
- * Multiple items in shopping cart displayed correctly
-*Navigate to basket
-*Verify that all items are displayed
-*Verify that product counter and prices are correct
-**/
-@Test
-public void multipleitems(){
-    homePage.navigateToSignInPage();
-    signInPage.login();
-    homePage.goTo();
-    homePage.itemAddedToCart();
-    basketpage.navigateToBasket();
-    basketpage.increaseQuantity();
-    basketpage.verifyQuantityUpdated();
-    basketpage.verifyProductCountUpdated();
+        basketpage.save();
+        basketpage.verifyinvoiceaddress();
+    }
+
+    /**
+     * Multiple items in shopping cart displayed correctly
+     * Navigate to basket
+     * Verify that all items are displayed
+     * Verify that product counter and prices are correct
+     **/
+    @Test
+    public void multipleitems() {
+        homePage.navigateToSignInPage();
+        signInPage.login();
+        homePage.goTo();
+        homePage.itemAddedToCart();
+        basketpage.navigateToBasket();
+        basketpage.increaseQuantity();
+        basketpage.verifyQuantityUpdated();
+        basketpage.verifyProductCountUpdated();
 
 
-}
-/**
-*Navigate to basket
-*Click proceed to checkout
-*Logout
-*Verify cart emptied when sign back in.
-**/
-@Test
-public void emptybasketlogout(){
-    homePage.navigateToSignInPage();
-    signInPage.login();
-    homePage.goTo();
-    homePage.hoverOverItem();
-    homePage.addItemToCart();
-    homePage.addedToCart();
-    basketpage.navigateToBasket();
-   basketpage.clickSignOut();
-   basketpage.verifyemptycart("(0)");
+    }
 
-}
+    /**
+     * Navigate to basket
+     * Click proceed to checkout
+     * Logout
+     * Verify cart emptied when sign back in.
+     **/
+    @Test
+    public void emptybasketlogout() {
+        homePage.navigateToSignInPage();
+        signInPage.login();
+        homePage.goTo();
+        homePage.hoverOverItem();
+        homePage.addItemToCart();
+        homePage.addedToCart();
+        basketpage.navigateToBasket();
+        basketpage.clickSignOut();
+        basketpage.verifyemptycart("(0)");
+
+    }
 }
