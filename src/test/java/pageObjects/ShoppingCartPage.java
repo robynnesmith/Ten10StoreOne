@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 
 import static junit.framework.TestCase.assertTrue;
 
@@ -33,17 +32,6 @@ public class ShoppingCartPage extends BasePage {
     private static final By PROCEED_TO_CHECKOUT_BUTTON = By.cssSelector(".checkout a");
     private static final By PERSONAL_INFORMATION_PAGE = By.id("checkout-personal-information-step");
     private static final By MODAL_PROCEED_TO_CHECKOUT_BUTTON = By.cssSelector(".cart-content-btn>a");
-    private static final By DIFFERENTADDRESS = By.cssSelector("input:last-child");
-    private static final By ADDRESS = By.cssSelector("[name='address1']");
-    private static final By CITY = By.cssSelector("[name='city']");
-    private static final By State = By.cssSelector("[name='id_state']");
-    private static final By PostCode = By.cssSelector("[name='postcode']");
-    private static final By Country = By.cssSelector("[name='id_country']");
-    private static final By CONTINUE = By.cssSelector(".continue");
-    private static final By VERIFYINVOICEADDRESS = By.cssSelector("#invoice_addresses");
-    private static final By SIGNOUT = By.cssSelector("[href*='mylogout=']");
-
-
 
 
     public void addToCart() {
@@ -79,9 +67,7 @@ public class ShoppingCartPage extends BasePage {
                 textPresent = true;
             }
             count++;
-
         }
-
         WebElement quantityUpdated = driver.findElement(QUANTITY_INPUT);
         String updatedQuantity = quantityUpdated.getAttribute("value");
         Assert.assertEquals("2", updatedQuantity);
@@ -102,56 +88,16 @@ public class ShoppingCartPage extends BasePage {
         Assert.assertTrue(elementIsVisible(personalInformationPage));
     }
 
-public void adddifferentaddress(){
-        waitAndClick(By.cssSelector("[href*='same_address=0']"));
-    wait.until(ExpectedConditions.presenceOfElementLocated(DIFFERENTADDRESS));
-        waitAndClick(DIFFERENTADDRESS);
-}
+
 
     public void addItemToCart() {
         homePage.itemAddedToCart();
         navigateToBasket();
         clickProceedToCheckout();
     }
-    public void address(String address1) {
-        findAndType(ADDRESS, address1);
-    }
 
-    public void city(String city) {
-        findAndType(CITY, city);
-    }
-
-    public void postcode(String Postcode) {
-        findAndType(PostCode, Postcode);
-    }
-    public void state(String state) {
-        Select drpsize = new Select(driver.findElement(State));
-        drpsize.selectByVisibleText(state);
-    }
-    public void save(){
-        waitAndClick(CONTINUE);
-    }
-    public void country(String country) {
-        Select drpsize = new Select(driver.findElement(Country));
-        drpsize.selectByVisibleText(country);
-    }
     public void clickModalProceedToCheckout() {
         waitAndClick(MODAL_PROCEED_TO_CHECKOUT_BUTTON);
     }
-
-    public void verifyinvoiceaddress(){
-        waitAndClick(By.cssSelector("#checkout-addresses-step"));
-        WebElement invoice = driver.findElement(VERIFYINVOICEADDRESS);
-        Assert.assertTrue(elementIsVisible(invoice));
-    }
-
-    public void clickSignOut(){
-        waitAndClick(SIGNOUT);
-    }
-    public void verifyemptycart(String input){
-        driver.getPageSource().contains(input);
-    }
-
 }
-
 
