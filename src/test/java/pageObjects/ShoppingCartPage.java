@@ -33,7 +33,7 @@ public class ShoppingCartPage extends BasePage {
     private static final By PROCEED_TO_CHECKOUT_BUTTON = By.cssSelector(".checkout a");
     private static final By PERSONAL_INFORMATION_PAGE = By.id("checkout-personal-information-step");
     private static final By MODAL_PROCEED_TO_CHECKOUT_BUTTON = By.cssSelector(".cart-content-btn>a");
-    private static final By DIFFERENTADDRESS = By.cssSelector("#id-address-invoice-address-372");
+    private static final By DIFFERENTADDRESS = By.cssSelector("input:last-child");
     private static final By ADDRESS = By.cssSelector("[name='address1']");
     private static final By CITY = By.cssSelector("[name='city']");
     private static final By State = By.cssSelector("[name='id_state']");
@@ -104,6 +104,7 @@ public class ShoppingCartPage extends BasePage {
 
 public void adddifferentaddress(){
         waitAndClick(By.cssSelector("[href*='same_address=0']"));
+    wait.until(ExpectedConditions.presenceOfElementLocated(DIFFERENTADDRESS));
         waitAndClick(DIFFERENTADDRESS);
 }
 

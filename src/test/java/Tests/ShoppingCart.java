@@ -136,15 +136,16 @@ public class ShoppingCart {
     basketpage.clickProceedToCheckout();
     checkoutPage.deliveryAddressSectionDisplayed();
   basketpage.adddifferentaddress();
-//    basketpage.address("g");
-//    basketpage.city("j");
-//    basketpage.postcode("96701");
-//    basketpage.state("Hawaii");
-//    basketpage.country("United States");
-//    basketpage.save();
+// basketpage.address("g");
+//   basketpage.city("j");
+//basketpage.postcode("96701");
+//   basketpage.state("Hawaii");
+//basketpage.country("United States");
+    basketpage.save();
    basketpage.verifyinvoiceaddress();
 }
 /**
+ * Multiple items in shopping cart displayed correctly
 *Navigate to basket
 *Verify that all items are displayed
 *Verify that product counter and prices are correct
@@ -153,12 +154,12 @@ public class ShoppingCart {
 public void multipleitems(){
     homePage.navigateToSignInPage();
     signInPage.login();
-    homePage.hoverOverItem();
-    homePage.addItemToCart();
-    homePage.addedToCart();
-    basketpage.navigateToBasket();
-    basketpage.clickProceedToCheckout();
     homePage.goTo();
+    homePage.itemAddedToCart();
+    basketpage.navigateToBasket();
+    basketpage.increaseQuantity();
+    basketpage.verifyQuantityUpdated();
+    basketpage.verifyProductCountUpdated();
 
 
 }
