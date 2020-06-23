@@ -53,5 +53,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:cucumber-plugin:5.7.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:docstring:5.7.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:cucumber-junit:5.7.0" level="project" />
   </component>
 </module>
