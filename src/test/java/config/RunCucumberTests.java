@@ -10,6 +10,6 @@ import org.junit.runner.RunWith;
         plugin = {"pretty", "html:target/cucumber","json:target/cucumber.json"},
         features = "src/test/resources/features/",
         glue = {"stepdefs"},
-        tags = {"@dev"})
+        tags = {""}) //add a tag such as @dev to run one test at a time and add the same tag above the Scenario: line for the test you want to run
 public class RunCucumberTests {
 }

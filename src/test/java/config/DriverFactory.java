@@ -11,9 +11,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class DriverFactory {
 
     private static WebDriver driver;
+    private static final Thread THREAD;
+
 
     static {
         WebDriverManager.chromedriver().setup();
+        setDriver();
+        THREAD = new Thread(driver::quit);
+        Runtime.getRuntime().addShutdownHook(THREAD);
     }
 
     public static WebDriver getDriver(){
@@ -28,5 +33,6 @@ public class DriverFactory {
         driver.manage().window().maximize();
         return driver;
     }
+
 
 }
