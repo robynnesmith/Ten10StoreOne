@@ -54,5 +54,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:docstring:5.7.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:cucumber-junit:5.7.0" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.7.21" level="project" />
   </component>
 </module>
