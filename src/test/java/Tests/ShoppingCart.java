@@ -162,7 +162,6 @@ public class ShoppingCart {
         basketpage.verifyQuantityUpdated();
         basketpage.verifyProductCountUpdated();
 
-
     }
 
     /**

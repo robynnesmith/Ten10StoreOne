@@ -3,6 +3,7 @@ package pageObjects;
 import org.apache.http.impl.conn.DefaultRoutePlanner;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,6 +15,7 @@ public class ProductPage extends BasePage {
     final By DRESS_IMAGE = By.cssSelector("img[alt = 'Printed Chiffon Dress']");
     private static final By QUANTITY_UP_BUTTON = By.cssSelector(".material-icons.touchspin-up");
     private static final By SIZE_DROPDWON = By.cssSelector("#group_1");
+    private static final By SIZE_MEDIUM = By.cssSelector("[title='M']");
     private static final By GREEN_COLOUR_OPTION = By.cssSelector("input[value = '15']");
 
     public void productPageDisplayed() {
@@ -30,7 +32,10 @@ public class ProductPage extends BasePage {
     }
 
     public void selectSize() {
+
         wait.until(ExpectedConditions.presenceOfElementLocated(SIZE_DROPDWON));
+//        waitAndClick(SIZE_DROPDWON);
+//        waitAndClick(SIZE_MEDIUM);
         Select size = new Select(driver.findElement(SIZE_DROPDWON));
         size.selectByVisibleText("M");
 
@@ -38,9 +43,7 @@ public class ProductPage extends BasePage {
     }
 
     public void selectColour() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(GREEN_COLOUR_OPTION));
-        WebElement chooseColour = driver.findElement(GREEN_COLOUR_OPTION);
-        chooseColour.click();
+        this.tryTwice(GREEN_COLOUR_OPTION, "click");
     }
 
 }

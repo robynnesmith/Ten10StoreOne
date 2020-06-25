@@ -72,6 +72,14 @@ public class SignIn {
         signInPage.forgottenPasswordCheck();
     }
 
+    @Test
+    public void changeAccountPreferences() {
+        homepage.navigateToSignInPage();
+        signInPage.login();
+        signInPage.updateAccountPreferences();
+        signInPage.accountPreferencesUpdated();
+    }
+
     /**
      * Able to sign out
      * Pre-Conditions - Must have signIn information for a registered user

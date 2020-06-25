@@ -1,10 +1,7 @@
 package pageObjects;
 
 import config.DriverFactory;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,7 +12,7 @@ abstract class BasePage {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
-    private PersonalDetails pd = new PersonalDetails("Robin", "Hood", "test@sherwood.com", "ghsjdc@test.com", "LadyM", "Sherwood Forest", "Nottingham", "Minnesota", "12345", "6320864892", "Forest");
+    private PersonalDetails pd = new PersonalDetails("Robin", "Hood", "test@sherwood.com", "ghsjdc@test.com", "LadyM", "badPassword", "12/12/90", "Sherwood Forest", "Nottingham", "Minnesota", "12345", "6320864892", "Forest");
 
 
     BasePage() {
@@ -42,11 +39,11 @@ abstract class BasePage {
         element.sendKeys(inputString);
     }
 
-    void waitUntilVisible(By selector){
+    void waitUntilVisible(By selector) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(selector));
     }
 
-    void waitUntilInvisible(By selector){
+    void waitUntilInvisible(By selector) {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(selector));
     }
 
@@ -57,4 +54,27 @@ abstract class BasePage {
     public void clearCookies() {
         driver.manage().deleteAllCookies();
     }
+
+    public String tryTwice(By selector, String action) {
+        wait.until(ExpectedConditions.presenceOfElementLocated(selector));
+        WebElement element = driver.findElement(selector);
+        String output = "";
+        try {
+            if (action.equals("click")) {
+                element.click();
+            } else if (action.equals("getText")) {
+                output = element.getText();
+            }
+            return output;
+        } catch (StaleElementReferenceException e) {
+            if (action.equals("click")) {
+                element.click();
+            } else if (action.equals("getText")) {
+                output = element.getText();
+            }
+            return output;
+        }
+
+    }
 }
+
