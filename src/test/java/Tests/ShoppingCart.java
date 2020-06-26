@@ -2,10 +2,7 @@ package Tests;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 import pageObjects.*;
-
-import static Tests.TestSuite.driverFactory;
 
 /**
  * Created by jack.forman on 08/11/2016.
@@ -135,14 +132,14 @@ public class ShoppingCart {
         basketpage.navigateToBasket();
         basketpage.clickProceedToCheckout();
         checkoutPage.deliveryAddressSectionDisplayed();
-        basketpage.adddifferentaddress();
+        basketpage.adddifferentaddress("click");
 // basketpage.address("g");
 //   basketpage.city("j");
 //basketpage.postcode("96701");
 //   basketpage.state("Hawaii");
 //basketpage.country("United States");
         basketpage.save();
-        basketpage.verifyinvoiceaddress();
+   basketpage.verifyinvoiceaddress();
     }
 
     /**
