@@ -2,12 +2,8 @@ package pageObjects;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-
-import static junit.framework.TestCase.assertTrue;
 
 /**
  * Created by jack.forman on 22/10/2016.
@@ -29,15 +25,17 @@ public class ShoppingCartPage extends BasePage {
     private static final By PROCEED_TO_CHECKOUT_BUTTON = By.cssSelector(".checkout a");
     private static final By PERSONAL_INFORMATION_PAGE = By.id("checkout-personal-information-step");
     private static final By MODAL_PROCEED_TO_CHECKOUT_BUTTON = By.cssSelector(".cart-content-btn>a");
-    private static final By DIFFERENTADDRESS = By.cssSelector(".radio-block:last-child");
+    private static final By DIFFERENTADDRESS = By.cssSelector("[value='436'] span");
     private static final By ADDRESS = By.cssSelector("[name='address1']");
     private static final By CITY = By.cssSelector("[name='city']");
     private static final By State = By.cssSelector("[name='id_state']");
     private static final By PostCode = By.cssSelector("[name='postcode']");
     private static final By Country = By.cssSelector("[name='id_country']");
     private static final By CONTINUE = By.cssSelector(".continue");
-    private static final By DELIVERY_OPTIONS = By.cssSelector("#checkout-addresses-step");
+    private static final By VERIFYINVOICEADDRESS = By.cssSelector("#invoice_addresses");
     private static final By SIGNOUT = By.cssSelector("[href*='mylogout=']");
+
+
 
 
     public void addToCart() {
@@ -67,9 +65,9 @@ public class ShoppingCartPage extends BasePage {
     public void verifyQuantityUpdated() {
         boolean textPresent = false;
         int count = 0;
-        while (!textPresent && count < 30) {
-            String text = tryTwice(PRODUCT_QUANTITY_TEXT, "getText");
-            if (text.equals("2 items")) {
+        while (!textPresent && count < 20){
+            String text = driver.findElement(PRODUCT_QUANTITY_TEXT).getText();
+            if (text.equals("2 items")){
                 textPresent = true;
             }
             count++;
@@ -80,8 +78,6 @@ public class ShoppingCartPage extends BasePage {
         String updatedQuantity = quantityUpdated.getAttribute("value");
         Assert.assertEquals("2", updatedQuantity);
     }
-
-
 
     public void verifyProductCountUpdated() {
         WebElement productUpdated = driver.findElement(PRODUCT_QUANTITY_TEXT);
@@ -98,18 +94,21 @@ public class ShoppingCartPage extends BasePage {
         Assert.assertTrue(elementIsVisible(personalInformationPage));
     }
 
-    public void adddifferentaddress() {
-        waitAndClick(By.cssSelector("[href*='same_address=0']"));
-        wait.until(ExpectedConditions.presenceOfElementLocated(DIFFERENTADDRESS));
-        tryTwice(DIFFERENTADDRESS, "click");
+    public void adddifferentaddress( String action) {
+    WebElement element = driver.findElement(DIFFERENTADDRESS);
+
+    if (action.equals("click")) {
+        element.click();
+    } else if (action.equals("getText")) {
+       element.getText();
     }
+}
 
     public void addItemToCart() {
         homePage.itemAddedToCart();
         navigateToBasket();
         clickProceedToCheckout();
     }
-
     public void address(String address1) {
         findAndType(ADDRESS, address1);
     }
@@ -121,35 +120,31 @@ public class ShoppingCartPage extends BasePage {
     public void postcode(String Postcode) {
         findAndType(PostCode, Postcode);
     }
-
     public void state(String state) {
         Select drpsize = new Select(driver.findElement(State));
         drpsize.selectByVisibleText(state);
     }
-
-    public void save() {
+    public void save(){
         waitAndClick(CONTINUE);
     }
-
     public void country(String country) {
         Select drpsize = new Select(driver.findElement(Country));
         drpsize.selectByVisibleText(country);
     }
-
     public void clickModalProceedToCheckout() {
         waitAndClick(MODAL_PROCEED_TO_CHECKOUT_BUTTON);
     }
 
-    public void verifyinvoiceaddress() {
-        WebElement delivery = driver.findElement(DELIVERY_OPTIONS);
-        Assert.assertTrue(elementIsVisible(delivery));
+    public void verifyinvoiceaddress(){
+        waitAndClick(By.cssSelector("#checkout-addresses-step"));
+        WebElement invoice = driver.findElement(VERIFYINVOICEADDRESS);
+        Assert.assertTrue(elementIsVisible(invoice));
     }
 
-    public void clickSignOut() {
+    public void clickSignOut(){
         waitAndClick(SIGNOUT);
     }
-
-    public void verifyemptycart(String input) {
+    public void verifyemptycart(String input){
         driver.getPageSource().contains(input);
     }
 
