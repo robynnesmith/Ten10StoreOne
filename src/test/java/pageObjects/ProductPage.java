@@ -12,9 +12,11 @@ public class ProductPage extends BasePage {
 
     private static final By ADD_TO_CART_BUTTON = By.cssSelector(".btn.btn-primary.add-to-cart");
     final By DRESS_IMAGE = By.cssSelector("img[alt = 'Printed Chiffon Dress']");
+    final By SHIRT_IMAGE = By.cssSelector(" img[alt = 'Faded Short Sleeves T-shirt'");
     private static final By QUANTITY_UP_BUTTON = By.cssSelector(".material-icons.touchspin-up");
     private static final By SIZE_DROPDWON = By.cssSelector("#group_1");
     private static final By GREEN_COLOUR_OPTION = By.cssSelector("input[value = '15']");
+    private static final By PRODUCT_AVAILABILITY = By.cssSelector("#product-availability");
 
     public void productPageDisplayed() {
         WebElement productPage = driver.findElement(ADD_TO_CART_BUTTON);
@@ -24,6 +26,8 @@ public class ProductPage extends BasePage {
     public void navigatetoProductPage() {
         waitAndClick(DRESS_IMAGE);
     }
+
+    public void navigatetoTshirtPage(){waitAndClick(SHIRT_IMAGE);}
 
     public void selectQuantity() {
         waitAndClick(QUANTITY_UP_BUTTON);
@@ -41,6 +45,11 @@ public class ProductPage extends BasePage {
         wait.until(ExpectedConditions.presenceOfElementLocated(GREEN_COLOUR_OPTION));
         WebElement chooseColour = driver.findElement(GREEN_COLOUR_OPTION);
         chooseColour.click();
+    }
+
+    public void productAvailability(){
+        WebElement outOfStock = driver.findElement(PRODUCT_AVAILABILITY);
+        Assert.assertTrue(elementIsVisible(outOfStock));
     }
 
 }

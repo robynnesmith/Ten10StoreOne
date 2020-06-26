@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -57,4 +58,11 @@ abstract class BasePage {
     public void clearCookies() {
         driver.manage().deleteAllCookies();
     }
+
+
+    void hoverAndClick(WebDriver driver, By elementToHover, By elementToClick) {
+        Actions action = new Actions(driver);
+        action.moveToElement(driver.findElement(elementToHover)).click(driver.findElement(elementToClick)).build().perform();
+    }
+
 }

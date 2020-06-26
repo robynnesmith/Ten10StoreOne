@@ -22,6 +22,24 @@ public class HomePage extends BasePage {
     private static final By FIRST_PRODUCT_QUICKVIEW = By.cssSelector("div.products > article:last-child .quick-view");
     private static final By ADD_TO_CART_BUTTON = By.cssSelector(".btn.btn-primary.add-to-cart");
     private static final By MODAL_WINDOW = By.cssSelector("#myModalLabel");
+    private static final By SEARCH = By.cssSelector(".ui-autocomplete-input");
+    private static final By CLICK_SEARCH = By.cssSelector(".material-icons.search");
+    private static final By WOMEN_CATEGORY = By.cssSelector("#category-3");
+    private static final By SUMMER_DRESS_CATEGORY = By.cssSelector("#category-11");
+    private static final By HOVER_SECTION = By.cssSelector(".product-description");
+    private static final By SELECT_PRICE_FILTER = By.cssSelector(" [href='http://3.11.70.191/index.php?controller=category&amp;id_category=3&amp;q=Price-%24-16-17']");
+    private static final By SELECT_SIZE_FILTER  = By.cssSelector("[href='http://3.11.70.191/index.php?controller=category&amp;id_category=3&amp;q=Size-S'] ");
+    private static final By SELECT_COLOUR_FILTER = By.cssSelector("[href='http://3.11.70.191/index.php?controller=category&amp;id_category=3&amp;q=Color-Yellow']");
+    private static final By CLICK_SUBSCRIBE = By.cssSelector(".btn.btn-primary.float-xs-right.hidden-xs-down");
+    private static final By SUBSCRIBE_SUCCESS = By.cssSelector(".alert.alert-success");
+    private static final By CONTACT_US = By.linkText("Contact us");
+    private static final By EMAIL_ADDRESS_CONTACT = By.cssSelector(".form-control[type = 'email']");
+    private static final By SEND_MESSAGE = By.cssSelector(".btn.btn-primary");
+    private static final By MESSAGE_SENT_SUCCESS = By.cssSelector(".col-xs-12.alert.alert-success");
+    private static final By CLEAR_FILTERS = By.cssSelector("#_desktop_search_filters_clear_all");
+
+
+
 
     public void goTo() {
         driver.get(URL);
@@ -70,4 +88,65 @@ public class HomePage extends BasePage {
         addItemToCart();
         addedToCart();
     }
+
+    public void search(String productName){findAndType(SEARCH, productName);
+
+    }
+
+    public void clickSearch(){waitAndClick(CLICK_SEARCH);}
+
+
+    public void hoverOverCategory() {
+
+        actions.moveToElement(driver.findElement(WOMEN_CATEGORY)).build().perform();
+
+        WebElement hoverView = driver.findElement(SUMMER_DRESS_CATEGORY);
+        Assert.assertTrue(elementIsVisible(hoverView));
+    }
+    public void clickSummerDresses(){
+        waitAndClick(SUMMER_DRESS_CATEGORY);
+    }
+
+
+    public void hoverAndClickQuickview(){ hoverAndClick(driver, HOVER_SECTION, QUICK_VIEW_LINK);
+
+    }
+
+    public void clickWomenCategory(){waitAndClick(WOMEN_CATEGORY);}
+
+    public void addToCartButton(){
+        waitAndClick(ADD_TO_CART_BUTTON);
+    }
+
+    public void clickPriceFilter(){waitAndClick(SELECT_PRICE_FILTER);
+    }
+
+    public void clickSizeFilter(){waitAndClick(SELECT_SIZE_FILTER);}
+
+    public void clickColourFilter(){waitAndClick(SELECT_COLOUR_FILTER);}
+
+    public void clickSubscribe(){waitAndClick(CLICK_SUBSCRIBE);}
+
+    public void subscribeSuccessAlert(){
+        waitUntilVisible(SUBSCRIBE_SUCCESS);
+        WebElement subscribeSuccess = driver.findElement(SUBSCRIBE_SUCCESS);
+        Assert.assertTrue(elementIsVisible(subscribeSuccess));
+    }
+
+    public void clickContactUs(){waitAndClick(CONTACT_US);
+    }
+    public void enterEmailAddress(String email){findAndType(EMAIL_ADDRESS_CONTACT, email);}
+
+    public void sendMessage(){waitAndClick(SEND_MESSAGE);}
+
+    public void messageSentSuccess(){
+        waitUntilVisible(MESSAGE_SENT_SUCCESS);
+        WebElement messageSuccess = driver.findElement(MESSAGE_SENT_SUCCESS);
+        Assert.assertTrue(elementIsVisible(messageSuccess));
+
+    }
+
+    public void clickClearFilters(){waitAndClick(CLEAR_FILTERS);}
+
+
 }
