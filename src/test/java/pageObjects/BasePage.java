@@ -1,6 +1,11 @@
 package pageObjects;
 
 import config.DriverFactory;
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -39,11 +44,11 @@ abstract class BasePage {
         element.sendKeys(inputString);
     }
 
-    void waitUntilVisible(By selector) {
+    void waitUntilVisible(By selector){
         wait.until(ExpectedConditions.visibilityOfElementLocated(selector));
     }
 
-    void waitUntilInvisible(By selector) {
+    void waitUntilInvisible(By selector){
         wait.until(ExpectedConditions.invisibilityOfElementLocated(selector));
     }
 
@@ -76,5 +81,11 @@ abstract class BasePage {
         }
 
     }
-}
 
+
+    void hoverAndClick(WebDriver driver, By elementToHover, By elementToClick) {
+        Actions action = new Actions(driver);
+        action.moveToElement(driver.findElement(elementToHover)).click(driver.findElement(elementToClick)).build().perform();
+    }
+
+}

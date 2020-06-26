@@ -2,6 +2,8 @@ package pageObjects;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -19,7 +21,7 @@ public class ShoppingCartPage extends BasePage {
     private static final By DELETE_FROM_CART_BUTTON = By.cssSelector(".remove-from-cart");
     private static final By NO_ITEMS_MESSAGE = By.cssSelector(".no-items");
     private static final By QUANTITY_UP_BUTTON = By.cssSelector(".material-icons.touchspin-up");
-    private static final By QUANTITY_INPUT = By.cssSelector(".js-cart-line-product-quantity.form-control");
+    private static final By QUANTITY_INPUT = By.cssSelector("#quantity_wanted");
     private static final By QUANTITY_INPUT_VALUE_2 = By.cssSelector("input[value'2']");
     private static final By PRODUCT_QUANTITY_TEXT = By.cssSelector("#cart-subtotal-products span:first-child");
     private static final By PROCEED_TO_CHECKOUT_BUTTON = By.cssSelector(".checkout a");
@@ -34,8 +36,18 @@ public class ShoppingCartPage extends BasePage {
     private static final By CONTINUE = By.cssSelector(".continue");
     private static final By VERIFYINVOICEADDRESS = By.cssSelector("#invoice_addresses");
     private static final By SIGNOUT = By.cssSelector("[href*='mylogout=']");
-
-
+    private static final By GO_TO_ORDERS = By.linkText("Orders");
+    private static final By ORDER_DETAILS = By.cssSelector(" tr:nth-child(1) > td.text-sm-center.order-actions > a:nth-child(1)");
+    private static final By TYPE_MESSAGE = By.cssSelector("textarea.form-control");
+    private static final By SEND_MESSAGE = By.cssSelector(".btn.btn-primary.form-control-submit");
+    private static final By MESSAGE_SUCCESS_ALERT = By.cssSelector("article.alert.alert-success");
+    private static final By SELECT_PRODUCT_FROM_ORDER = By.cssSelector("option[value = '1']");
+    private static final By REORDER = By.cssSelector(" tr:nth-child(1) > td.text-sm-center.order-actions > a:nth-child(2)");
+    private static final By CONTINUE_TO_SHIPPING = By.cssSelector("button[name ='confirm-addresses']");
+    private static final By CONTINUE_TO_PAYMENT = By.cssSelector("button[name = 'confirmDeliveryOption']");
+    private static final By PAYMENT_OPTION = By.cssSelector("#payment-option-2");
+    private static final By AGREE_TO_TERMS = By.cssSelector(".custom-checkbox");
+    private static final By CONFIRM_ORDER = By.cssSelector("#payment-confirmation");
 
 
     public void addToCart() {
@@ -61,6 +73,8 @@ public class ShoppingCartPage extends BasePage {
     public void increaseQuantity() {
         waitAndClick(QUANTITY_UP_BUTTON);
     }
+
+    public void inputIncreaseQuantity(String number){findAndType(QUANTITY_INPUT, number);}
 
     public void verifyQuantityUpdated() {
         boolean textPresent = false;
@@ -103,6 +117,50 @@ public class ShoppingCartPage extends BasePage {
        element.getText();
     }
 }
+
+    public void goToOrders(){waitAndClick(GO_TO_ORDERS);}
+
+    public void clickOrderDetails(){
+        waitAndClick(ORDER_DETAILS);
+    }
+
+    public void selectProductInOrders() {waitAndClick(SELECT_PRODUCT_FROM_ORDER);
+
+    }
+
+    public void typeMessage(String message){findAndType(TYPE_MESSAGE, message);}
+    public void sendMessage(){waitAndClick(SEND_MESSAGE);}
+
+    public void checkMessageSent() {
+        waitUntilVisible(MESSAGE_SUCCESS_ALERT);
+        WebElement removedFromCart = driver.findElement(MESSAGE_SUCCESS_ALERT);
+        Assert.assertTrue(elementIsVisible(removedFromCart));
+    }
+    public void clickReorder(){waitAndClick(REORDER);}
+
+
+    public void countinueToShipping(){waitAndClick(CONTINUE_TO_SHIPPING);
+
+
+    }
+    public void continueToPayment(){waitAndClick(CONTINUE_TO_PAYMENT);}
+
+    public void clickPaymentOption() {
+        WebElement bankWire = driver.findElement(PAYMENT_OPTION);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", bankWire);
+    }
+
+    public void clickTermsAndAgreement(){waitAndClick(AGREE_TO_TERMS);}
+
+    public void confirmOrder(){waitAndClick(CONFIRM_ORDER);}
+
+    public void orderConfirmationPageIsDisplayed (String input){
+        driver.getPageSource().contains(input);
+    }
+
+
+
+
 
     public void addItemToCart() {
         homePage.itemAddedToCart();

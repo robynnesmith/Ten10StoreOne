@@ -61,6 +61,8 @@ public class SignInPage extends BasePage {
         assertTrue(elementIsVisible(alertBox));
     }
 
+    public void enterPasswordSignIn(String password){findAndType(PASSWORD_INPUT, password);}
+
     public void enterPassword() {
         findAndType(PASSWORD_INPUT, pd.getPassword());
     }
