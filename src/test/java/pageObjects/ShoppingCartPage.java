@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 /**
@@ -27,14 +28,14 @@ public class ShoppingCartPage extends BasePage {
     private static final By PROCEED_TO_CHECKOUT_BUTTON = By.cssSelector(".checkout a");
     private static final By PERSONAL_INFORMATION_PAGE = By.id("checkout-personal-information-step");
     private static final By MODAL_PROCEED_TO_CHECKOUT_BUTTON = By.cssSelector(".cart-content-btn>a");
-    private static final By DIFFERENTADDRESS = By.cssSelector("[value='436'] span");
+    private static final By DIFFERENTADDRESS = By.cssSelector(".radio-block:last-child");
     private static final By ADDRESS = By.cssSelector("[name='address1']");
     private static final By CITY = By.cssSelector("[name='city']");
     private static final By State = By.cssSelector("[name='id_state']");
     private static final By PostCode = By.cssSelector("[name='postcode']");
     private static final By Country = By.cssSelector("[name='id_country']");
     private static final By CONTINUE = By.cssSelector(".continue");
-    private static final By VERIFYINVOICEADDRESS = By.cssSelector("#invoice_addresses");
+    private static final By VERIFYINVOICEADDRESS = By.cssSelector("#checkout-addresses-step");
     private static final By SIGNOUT = By.cssSelector("[href*='mylogout=']");
     private static final By GO_TO_ORDERS = By.linkText("Orders");
     private static final By ORDER_DETAILS = By.cssSelector(" tr:nth-child(1) > td.text-sm-center.order-actions > a:nth-child(1)");
@@ -79,8 +80,8 @@ public class ShoppingCartPage extends BasePage {
     public void verifyQuantityUpdated() {
         boolean textPresent = false;
         int count = 0;
-        while (!textPresent && count < 20){
-            String text = driver.findElement(PRODUCT_QUANTITY_TEXT).getText();
+        while (!textPresent && count < 30){
+            String text = tryTwice(PRODUCT_QUANTITY_TEXT, "getText");
             if (text.equals("2 items")){
                 textPresent = true;
             }
@@ -108,15 +109,11 @@ public class ShoppingCartPage extends BasePage {
         Assert.assertTrue(elementIsVisible(personalInformationPage));
     }
 
-    public void adddifferentaddress( String action) {
-    WebElement element = driver.findElement(DIFFERENTADDRESS);
-
-    if (action.equals("click")) {
-        element.click();
-    } else if (action.equals("getText")) {
-       element.getText();
+    public void adddifferentaddress() {
+        waitAndClick(By.cssSelector("[href*='same_address=0']"));
+        wait.until(ExpectedConditions.presenceOfElementLocated(DIFFERENTADDRESS));
+        tryTwice(DIFFERENTADDRESS, "click");
     }
-}
 
     public void goToOrders(){waitAndClick(GO_TO_ORDERS);}
 

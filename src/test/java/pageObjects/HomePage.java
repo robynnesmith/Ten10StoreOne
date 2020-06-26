@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by jack.forman on 22/10/2016.
  */
@@ -82,6 +84,7 @@ public class HomePage extends BasePage {
     }
 
     public void addedToCart() {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS) ;
         waitUntilVisible(MODAL_WINDOW);
         WebElement addedToCart = driver.findElement(MODAL_WINDOW);
         Assert.assertTrue(elementIsVisible(addedToCart));
@@ -123,10 +126,11 @@ public class HomePage extends BasePage {
         waitAndClick(ADD_TO_CART_BUTTON);
     }
 
-    public void clickPriceFilter(){waitAndClick(SELECT_PRICE_FILTER);
+    public void clickPriceFilter(){tryTwice(SELECT_PRICE_FILTER, "click");
     }
 
-    public void clickSizeFilter(){waitAndClick(SELECT_SIZE_FILTER);}
+    public void clickSizeFilter(){
+        waitAndClick(SELECT_SIZE_FILTER);}
 
     public void clickColourFilter(){waitAndClick(SELECT_COLOUR_FILTER);}
 

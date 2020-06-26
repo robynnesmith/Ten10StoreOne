@@ -9,6 +9,8 @@ import pageObjects.ProductPage;
 import pageObjects.ShoppingCartPage;
 import pageObjects.SignInPage;
 
+import java.util.Random;
+
 import static Tests.TestSuite.driverFactory;
 
 /**
@@ -150,7 +152,7 @@ public class BuyJourney {
 * Verify that correct product is displayed
    */
 
-    @Test @Ignore
+    @Test
     public void testProductFiltersOnWomenPage(){
         homepage.clickWomenCategory();
         homepage.clickSizeFilter();
@@ -168,11 +170,15 @@ public class BuyJourney {
     */
     @Test
     public void subscribeToNewsAndSpecialSales(){
-        signInPage.enterSignInEmailAddress("jellybaby2@gmail.com");
+        signInPage.enterSignInEmailAddress("jellybaby2" + generateRandomDouble()+ "@gmail.com");
         homepage.clickSubscribe();
         homepage.subscribeSuccessAlert();
     }
 
+    public static int generateRandomDouble(){
+        Random random = new Random();
+        return random.nextInt();
+    }
 
     /*
  *From the homepage click on - Contact Us

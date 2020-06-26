@@ -132,7 +132,7 @@ public class ShoppingCart {
         basketpage.navigateToBasket();
         basketpage.clickProceedToCheckout();
         checkoutPage.deliveryAddressSectionDisplayed();
-        basketpage.adddifferentaddress("click");
+        basketpage.adddifferentaddress();
 // basketpage.address("g");
 //   basketpage.city("j");
 //basketpage.postcode("96701");
