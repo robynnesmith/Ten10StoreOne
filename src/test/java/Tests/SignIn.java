@@ -13,14 +13,13 @@ import static Tests.TestSuite.driverFactory;
  */
 public class SignIn {
 
-    public static WebDriver driver = driverFactory.getDriver();
-    private HomePage homepage = new HomePage(driver);
-    private SignInPage signInPage = new SignInPage(driver);
+    private HomePage homepage = new HomePage();
+    private SignInPage signInPage = new SignInPage();
 
 
     @Before
     public void individualSetUp() {
-        driver.manage().deleteAllCookies();
+        homepage.clearCookies();
         homepage.goTo();
     }
 

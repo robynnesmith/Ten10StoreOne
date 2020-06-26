@@ -10,10 +10,6 @@ import org.openqa.selenium.support.ui.Select;
 
 public class ProductPage extends BasePage {
 
-    public ProductPage (WebDriver driver) {
-        super(driver);
-    }
-
     private static final By ADD_TO_CART_BUTTON = By.cssSelector(".btn.btn-primary.add-to-cart");
     final By DRESS_IMAGE = By.cssSelector("img[alt = 'Printed Chiffon Dress']");
     private static final By QUANTITY_UP_BUTTON = By.cssSelector(".material-icons.touchspin-up");

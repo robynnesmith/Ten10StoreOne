@@ -12,10 +12,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  */
 public class HomePage extends BasePage {
 
-    public HomePage(WebDriver driver) {
-        super(driver);
-    }
-
     private static String URL = "http://3.11.70.191/index.php";
     private Actions actions = new Actions(driver);
 
@@ -26,11 +22,15 @@ public class HomePage extends BasePage {
     private static final By FIRST_PRODUCT_QUICKVIEW = By.cssSelector("div.products > article:last-child .quick-view");
     private static final By ADD_TO_CART_BUTTON = By.cssSelector(".btn.btn-primary.add-to-cart");
     private static final By MODAL_WINDOW = By.cssSelector("#myModalLabel");
-
+    private static final By SIGNOUT = By.cssSelector("");
     public void goTo() {
         driver.get(URL);
     }
 
+
+    public void signout(){
+        waitAndClick(SIGNOUT);
+    }
     public void navigateToSignInPage() {
         waitAndClick(SIGN_IN_BUTTON);
     }

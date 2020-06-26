@@ -15,15 +15,14 @@ import static Tests.TestSuite.driverFactory;
  */
 public class BuyJourney {
 
-    public static WebDriver driver = driverFactory.getDriver();
-    private HomePage homepage = new HomePage(driver);
-    private ShoppingCartPage basketpage = new ShoppingCartPage(driver);
-    private SignInPage signInPage = new SignInPage(driver);
-    private ProductPage productPage = new ProductPage(driver);
+    private HomePage homepage = new HomePage();
+    private ShoppingCartPage basketpage = new ShoppingCartPage();
+    private SignInPage signInPage = new SignInPage();
+    private ProductPage productPage = new ProductPage();
 
     @Before
     public void individualSetUp() {
-        driver.manage().deleteAllCookies();
+        homepage.clearCookies();
         homepage.goTo();
         homepage.maximiseBrowserWindow();
     }

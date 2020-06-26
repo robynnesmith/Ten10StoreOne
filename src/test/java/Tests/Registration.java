@@ -20,18 +20,17 @@ import static Tests.TestSuite.driverFactory;
 
 public class Registration {
 
-    public static WebDriver driver = driverFactory.getDriver();
-    private HomePage homepage = new HomePage(driver);
-    private ShoppingCartPage basketpage = new ShoppingCartPage(driver);
-    private SignInPage signInPage = new SignInPage(driver);
-    private CreateNewAccountPage createNewAccountPage = new CreateNewAccountPage(driver);
+    private HomePage homepage = new HomePage();
+    private ShoppingCartPage basketpage = new ShoppingCartPage();
+    private SignInPage signInPage = new SignInPage();
+    private CreateNewAccountPage createNewAccountPage = new CreateNewAccountPage();
 
     /**
      * This should make sure we are on the correct page, i.e. set up each test case so we can be sure that they run
      */
     @Before
     public void individualSetUp() {
-        driver.manage().deleteAllCookies();
+        homepage.clearCookies();
         homepage.goTo();
     }
 
