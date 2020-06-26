@@ -22,6 +22,7 @@ public class HomePage extends BasePage {
     private static final By FIRST_PRODUCT_QUICKVIEW = By.cssSelector("div.products > article:last-child .quick-view");
     private static final By ADD_TO_CART_BUTTON = By.cssSelector(".btn.btn-primary.add-to-cart");
     private static final By MODAL_WINDOW = By.cssSelector("#myModalLabel");
+    private static final By SIGNOUT = By.cssSelector("");
     private static final By SEARCH = By.cssSelector(".ui-autocomplete-input");
     private static final By CLICK_SEARCH = By.cssSelector(".material-icons.search");
     private static final By WOMEN_CATEGORY = By.cssSelector("#category-3");
@@ -45,6 +46,10 @@ public class HomePage extends BasePage {
         driver.get(URL);
     }
 
+
+    public void signout(){
+        waitAndClick(SIGNOUT);
+    }
     public void navigateToSignInPage() {
         waitAndClick(SIGN_IN_BUTTON);
     }

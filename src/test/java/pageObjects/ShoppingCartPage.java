@@ -5,10 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-
-import static junit.framework.TestCase.assertTrue;
 
 /**
  * Created by jack.forman on 22/10/2016.
@@ -30,7 +27,7 @@ public class ShoppingCartPage extends BasePage {
     private static final By PROCEED_TO_CHECKOUT_BUTTON = By.cssSelector(".checkout a");
     private static final By PERSONAL_INFORMATION_PAGE = By.id("checkout-personal-information-step");
     private static final By MODAL_PROCEED_TO_CHECKOUT_BUTTON = By.cssSelector(".cart-content-btn>a");
-    private static final By DIFFERENTADDRESS = By.cssSelector("input:last-child");
+    private static final By DIFFERENTADDRESS = By.cssSelector("[value='436'] span");
     private static final By ADDRESS = By.cssSelector("[name='address1']");
     private static final By CITY = By.cssSelector("[name='city']");
     private static final By State = By.cssSelector("[name='id_state']");
@@ -111,10 +108,14 @@ public class ShoppingCartPage extends BasePage {
         Assert.assertTrue(elementIsVisible(personalInformationPage));
     }
 
-public void adddifferentaddress(){
-        waitAndClick(By.cssSelector("[href*='same_address=0']"));
-    wait.until(ExpectedConditions.presenceOfElementLocated(DIFFERENTADDRESS));
-        waitAndClick(DIFFERENTADDRESS);
+    public void adddifferentaddress( String action) {
+    WebElement element = driver.findElement(DIFFERENTADDRESS);
+
+    if (action.equals("click")) {
+        element.click();
+    } else if (action.equals("getText")) {
+       element.getText();
+    }
 }
 
     public void goToOrders(){waitAndClick(GO_TO_ORDERS);}
